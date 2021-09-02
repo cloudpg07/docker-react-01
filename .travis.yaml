@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build  -t cloudpg07/docker-react-01 -f Dockerfile.dev .
+
+script:
+  - docker run cloudpg07/docker-react-01 npm run test -- --coverage
