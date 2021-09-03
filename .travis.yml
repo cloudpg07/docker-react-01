@@ -8,3 +8,19 @@ before_install:
 script:
   - docker run cloudpg07/docker-react-01 npm run test -- --coverage
 
+# Setting up the aws beanstalk
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react-01"
+  env: "Dockerreact01-env"
+  bucket_name: "elasticbeanstalk-us-east-2-362076328835"
+  bucket_path: "docker-react-01"
+
+  # Only push the code to aws when there is change in the master branch
+  on:
+    branch: master
+  
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: $AWS_SECRET_KEY
